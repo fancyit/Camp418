@@ -17,7 +17,7 @@ module.exports = {
                 "magicDmg": 0,
                 "physicArmorPercents": 0,
                 "magicArmorPercents": 0,
-                "cooldown": 4
+                "cooldown": 0
             },
             {
                 "name": "Каноничный фаербол",
@@ -25,7 +25,7 @@ module.exports = {
                 "magicDmg": 5,
                 "physicArmorPercents": 0,
                 "magicArmorPercents": 0,
-                "cooldown": 3
+                "cooldown": 0
             },
             {
                 "name": "Магический блок",
@@ -33,7 +33,7 @@ module.exports = {
                 "magicDmg": 0,
                 "physicArmorPercents": 100,
                 "magicArmorPercents": 100,
-                "cooldown": 4
+                "cooldown": 0
             },
         ]
     },
@@ -55,7 +55,7 @@ module.exports = {
                 "magicDmg": 4,
                 "physicArmorPercents": 0,
                 "magicArmorPercents": 0,
-                "cooldown": 3
+                "cooldown": 0
             },
             {
                 "name": "Удар хвостом",
@@ -63,8 +63,8 @@ module.exports = {
                 "magicDmg": 0,
                 "physicArmorPercents": 50,
                 "magicArmorPercents": 0,
-                "cooldown": 2
+                "cooldown": 0
             },
         ]
     }
-}
+};

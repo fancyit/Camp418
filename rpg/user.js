@@ -35,4 +35,4 @@ module.exports = {
             "cooldown": 4
         },
     ]
-}
+};
