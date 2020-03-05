@@ -1,5 +1,5 @@
 const readlineSync = require('readline-sync');
-const numLength = Math.floor(Math.random() * (3)) + 3;//разрядность числа
+const numLength = Math.floor(Math.random() * (3)) + 3;//разрядность числа = Math.floor(Math.random() * (max-min)) + min
 let attempts = numLength + 1, guess = 0;// количество попыток равное кол-ву разрядов, можно поменять, я так сделал для примера
 let j = Math.floor(Math.random() * (9)) + 1;// первая цифра числа
 let num = [j];// представляем число в виде массива цифр
