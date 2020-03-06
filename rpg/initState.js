@@ -1,7 +1,7 @@
 module.exports = {
     user: {
         currentAction: null,
-        health:null,
+        health:10,
         moves: [
             {
                 "name": "Удар боевым кадилом",
@@ -35,11 +35,12 @@ module.exports = {
                 "magicArmorPercents": 100,
                 "cooldown": 4
             },
-        ]
+        ],
+        movesCooleDown:[]
     },
     monster: {
         currentAction: null,
-        health: null,
+        health: 10,
         moves: [
             {
                 "name": "Удар когтистой лапой",
@@ -65,6 +66,7 @@ module.exports = {
                 "magicArmorPercents": 0,
                 "cooldown": 2
             },
-        ]
+        ],
+        movesCooleDown: []
     }
 }
