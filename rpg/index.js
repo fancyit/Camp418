@@ -9,7 +9,7 @@ const randomize = (max) => {
     return Math.floor(Math.random() * max);
 };
 const rangeValidator = (min, max, v) => {
-    return (v > min && v < max);
+    return (v && v > min && v < max);
 }
 const userAvailableMoves = (s) => {
     s.moves.map((el, index) => {
@@ -89,7 +89,7 @@ const fight = (userChoice) => {
     usersMove(userChoice);
     damageCalc();
 };
-console.log(`Добро пожаловать в игру! Пожалуйста, выберите сложность, указав кол-во здровья вашего персонажа от 10 до 5
+console.log(`Добро пожаловать в игру! Пожалуйста, выберите сложность, указав кол-во здровья вашего персонажа от 5 до 10
             (чкм меньше - тем сложнее ;-) ) У монстра 10 здоровья, по умолчанию у вас тоже. Во время боя выбирайте цифру доступного действия`);
 
 let initUserHealth = rls.question(`Укажите здоровье: `);
