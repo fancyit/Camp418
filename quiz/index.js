@@ -48,8 +48,6 @@ for (let i = 0; i < _files.length; i++) {
 };
 //получаем массив случайных чисел, по которым будем задавать вопросы
 randomNums();
-console.log(num);
-
 // console.log(questions[num[0]].length);
 for (let i = 0; i < num.length; i++) {
     console.log(`Вопрос № ${i + 1}: ${questions[num[i]][0]}`);
