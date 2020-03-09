@@ -1,16 +1,19 @@
 const rls = require('readline-sync');
-let monster = require('./monster.js');
-let user = require('./user');
-let state = require('./initState');
+let monster = require('./monster.js'); //определим модель монстра
+let user = require('./user'); //определеим модел пользователя(Евстафий)
+let state = require('./initState'); //Я использую паттерн состояния приложения, каждое действие его меняет
 let idx = 0;
 let movesCounter = 0;
 let msg = '';
+//рандомайзер до максимального значения max
 const randomize = (max) => {
     return Math.floor(Math.random() * max);
 };
+//проверка ввода
 const rangeValidator = (min, max, v) => {
     return (v && v > min && v < max);
 }
+//отображаем доступные действия пользователя и действия на кулдауне
 const userAvailableMoves = (s) => {
     s.moves.map((el, index) => {
         console.log(index + ': ' + el.name + `(Физ. урон: ${el.physicalDmg}, физ. броня: ${el.physicArmorPercents}, Маг.урон: ${el.magicDmg}, маг.броня: ${el.magicArmorPercents}, кд: ${el.cooldown})`);
@@ -20,6 +23,7 @@ const userAvailableMoves = (s) => {
         console.log(`${el.name} (Физ. урон: ${el.physicalDmg}, физ. броня: ${el.physicArmorPercents}, Маг.урон: ${el.magicDmg}, маг.броня: ${el.magicArmorPercents}, кд: ${el.cooldown})`);
     });
 };
+//ход монстра
 const monstersMove = () => {
     idx = randomize(state.monster.moves.length - 1);
     let curMove = state.monster.moves[idx];
@@ -30,6 +34,7 @@ const monstersMove = () => {
         state.monster.moves.splice(idx, 1);
     }
 };
+//ход юзера
 const usersMove = (idx) => {
     let s = state.user;
     s.currentAction = s.moves[idx].name;
@@ -38,6 +43,7 @@ const usersMove = (idx) => {
         s.moves.splice(idx, 1);
     }
 };
+//пробегаем по всем экшнам на куладуне, проверяем, если кулдаун прошел, возвращаем в доступные
 const cooldownIterator = (obj) => {
     let model;
     //console.log("iterator 1", obj);
@@ -65,6 +71,7 @@ const cooldownIterator = (obj) => {
         });
     }
 };
+//считаем нанесенный урон
 const damageCalc = () => {
     let usersHealth = state.user.health;
     let monstersHealth = state.monster.health;
@@ -82,6 +89,7 @@ const damageCalc = () => {
         (usersAction.physicalDmg * (monstersAction.physicArmorPercents / 100)) +
         usersAction.magicDmg - (usersAction.magicDmg * (monstersAction.magicArmorPercents / 100)));
 };
+//вызываем все функции по факту получения экшна от юзера
 const fight = (userChoice) => {
     cooldownIterator('monster');
     cooldownIterator('');
@@ -89,9 +97,10 @@ const fight = (userChoice) => {
     usersMove(userChoice);
     damageCalc();
 };
+//приветствие(видно только вначале игры)
 console.log(`Добро пожаловать в игру! Пожалуйста, выберите сложность, указав кол-во здровья вашего персонажа от 5 до 10
             (чкм меньше - тем сложнее ;-) ) У монстра 10 здоровья, по умолчанию у вас тоже. Во время боя выбирайте цифру доступного действия`);
-
+//задаем сложность
 let initUserHealth = rls.question(`Укажите здоровье: `);
 while (!rangeValidator(4, 11, initUserHealth)) {
     console.log(`Здоровье может быть от 5 до 10 !!!`);
@@ -115,6 +124,7 @@ while (state.user.health > 0 && state.monster.health > 0) {
     movesCounter++;
     //break;   
 }
+//финальное сообщение
 msg = state.user.health > 0 ? `################# Отличная работ! Ты победил!!! #################`
     : state.monster.health > 0 ? `################# Монстр оказался хитрее... #################`
         : `################# Вы оба сдохли!!! #################`;
