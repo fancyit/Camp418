@@ -6,6 +6,21 @@ let num = [j];// представляем число в виде массива 
 let bulls = []; // быки
 let cows = []; // коровы
 let success = false;
+const validateInput = (str) => {
+    const arr = str.split('');
+    const hash = new Map();    
+    result = true;
+    // If repeat the value is false, if no repeat the value is true
+    for (let i = 0; i < arr.length; i++) {
+        if (hash.get(arr[i]) === undefined) {
+            hash.set(arr[i], true);
+        } else {
+            result = false;
+            break
+        }        
+    }
+    return result;
+}
 for (let k = 0; k < numLength; k++) {   // генерим массив случайных чисел дразмером, соответствующим разрядности, полученной выше
     while (num.toString().indexOf(j) != -1) {
         j = Math.floor(Math.random() * (9)) + 1;
@@ -14,9 +29,13 @@ for (let k = 0; k < numLength; k++) {   // генерим массив случ�
 }
 let test = num.join(''); // приводим массив к строке, со строками работать легче, чем с числами из-за неявного приведения типов при мат операциях
 console.log(test);// в тестовых целях отображаем загаданное число
-console.log(`Начнем? Загадано ${test.length} разрядное число, цифры не должны повторяться! =) Попытки: ${attempts}`);
+console.log(`Начнем? Загадано ${test.length} разрядное число, цифры не должны повторяться! =) Кол-во попыток: ${attempts}`);
 while (attempts > 0) {
-    guess = readlineSync.question(`Попытка № ${attempts}: `);
+    let guessNum = Math.abs(numLength - attempts + 2);
+    guess = readlineSync.question(`Попытка № ${guessNum}: `);
+    while(!validateInput(guess)){
+        guess = readlineSync.question(`Попытка № ${guessNum}: `);
+    }
     if (guess === test) {
         console.log(`Наши поздравления, вы угадали!`); //первым делом проверяем на точное совпадение, чтобы не делать лишнего.
         success = true;
