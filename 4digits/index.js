@@ -10,7 +10,7 @@ const validateInput = (str) => {
     const arr = str.split('');
     const hash = new Map();    
     result = true;
-    // If repeat the value is false, if no repeat the value is true
+    // Если в словаре значения нет - переходим к следующей итерации, если же есть - дубль найден, валидация неудачна, выходим из цикла
     for (let i = 0; i < arr.length; i++) {
         if (hash.get(arr[i]) === undefined) {
             hash.set(arr[i], true);
@@ -34,6 +34,7 @@ while (attempts > 0) {
     let guessNum = Math.abs(numLength - attempts + 2);
     guess = readlineSync.question(`Попытка № ${guessNum}: `);
     while(!validateInput(guess)){
+        console.log(`Цифры в числе должны быть уникальными =)`);        
         guess = readlineSync.question(`Попытка № ${guessNum}: `);
     }
     if (guess === test) {
