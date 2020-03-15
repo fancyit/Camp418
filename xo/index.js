@@ -21,6 +21,7 @@ const sign = () => {
   return choice;
 };
 const p1Sign = sign();
+const p2Sign = p1Sign === 'x' ? 'o' : 'x';
 
 console.log(grid.toString());
-console.log(p1Sign);
+console.log(p1Sign, p2Sign);
