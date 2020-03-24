@@ -4,67 +4,55 @@ const assert = require('assert');
 const controller = require('../src/game');
 const server = require('../src/server');
 
-let rez = {};
+let lastRez = {};
+let lastErr = null;
+let currentPlayer = 1;
+
 Given('пустое поле', () => {
-  controller.reset();
+  return request(server)
+      .post('/reset')
+      .then(res => lastRez =res)
+      .catch(err => lastErr = err)
 });
+
 Given('ходит игрок {int}', (int) => {
-  controller.setCurrentPlayer(int);
+    return request(server)
+        .post('/setCurrentPlayer')
+        .send({ player: int })
+        .then(res => currentPlayer =res)
+        .catch(err => lastErr = err); 
 });
-Given('игрок ходит в клетку {int}, {int}', (x, y) => {
+
+Given('поле {string}', function (str){    
+    return request(server)
+        .post('/presetField')
+        .send({field: str})
+        .then(value => {
+            lastRez = value;
+        }).catch(err => {
+            lastErr = err;
+        });        
+});
+
+When('игрок ходит в клетку {int}, {int}', (x, y) => {
   return request(server)
       .post('/move')
       .send({ x, y })
       .then((res) => {
-        rez = res;
+        lastRez = res;
+      }).catch(err => {
+          lastErr = err;
       });
 });
 Then('поле становится {string}', (rez) => {
-  let data = request(server)
-      .get('/getField')
-      .then((res) => {
-        res;
-      });
-  return assert(data,rez);
+    let data = request(server).get('/getField')
+    return assert(data , rez);
 });
-// Given('поле {string}', function (str){
-//     str = controller.presetField(("100|200|102").split('|'));
-//     let currentPlayer = 1;
-//     return data = request(server)
-//         .post('/move')
-//         .send({ x, y })
-//         .then((res) => {
-//             rez = res;
-//         });
-// });
-Then(/^возвращается ошибка$/, function () {
-    let field = "100|200|102";
-    let data = request(server)
-        .get('/getField')
-        .then((res) => {
-            res;
-        });
-    return assert(data,field.split('|'));
-});
-Given('поле {string}', function (str){
-    let currentPlayer = 1;
-    return data = request(server)
-        .post('/move')
-        .send({ x, y })
-        .then((res) => {
-            rez = res;
-        });
-});
+
 Then('победил игрок {int}', (currentPlayer) => {
-   let res = data = request(server)
-       .post('/move')
-       .send({ x, y })
-       .then((res) => {
-           rez = res;
-       });
-   if(res.data.data === 'Win'){
-       return 'победил игрок' + currentPlayer
-   }
-   else
-       return res;
+   const data =  request(server).get('/getWinner');
+   return assert(currentPlayer, data);
+});
+Then(/^возвращается ошибка$/, function () {
+    return lastErr;
 });

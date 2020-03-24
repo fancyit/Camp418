@@ -3,6 +3,7 @@ const { checkLines, checkDiags } = require('./helpers/winChecker');
 let field = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 let currentPlayer = 1;
 let movesCounter = 0;
+let winner = null;
 const maxMoves = Math.pow(field.length, 2);
 
 function getField() {
@@ -20,6 +21,7 @@ function makeMove(x, y) {
   if(validate(x,y, getField())) {
     field[x-1][y-1] = currentPlayer;
     if (checkWin(currentPlayer, field)){
+      winner = currentPlayer;
       return 'Win'
     }
     setCurrentPlayer();
@@ -43,6 +45,9 @@ function setCurrentPlayer() {
 function  getCurrentPlayer(){
   return  currentPlayer;
 }
+function getWinner() {
+  return winner;
+}
 module.exports = {
   getField,
   makeMove,
@@ -50,4 +55,5 @@ module.exports = {
   presetField,
   setCurrentPlayer,
   getCurrentPlayer,
+  getWinner,
 };

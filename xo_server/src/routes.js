@@ -5,6 +5,16 @@ router.get('/getField', (req, res) => {
   res.send(200, controller.getField());
 });
 
+router.get('/getWinner', (req, res) => {
+  res.send(200, controller.getWinner());
+});
+
+router.get('/setCurrentPlayer', (req, res) => {
+  controller.setCurrentPlayer(req.body.player);
+  res.send(200, controller.getCurrentPlayer());
+});
+
+
 router.post('/move', (req, res) => {
   let data = controller.makeMove(req.body.x, req.body.y);
   if (!data) {
@@ -23,4 +33,8 @@ router.post('/reset', (req, res) => {
   res.send(200,controller.reset());
 });
 
+router.post('/presetField', (req, res) => {
+  controller.presetField(req.body.field);
+  res.status(200).send('OK')
+});
 module.exports = router;
