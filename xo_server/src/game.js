@@ -2,7 +2,8 @@ const validate = require('./helpers/validators');
 const { checkLines, checkDiags } = require('./helpers/winChecker');
 let field = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 let currentPlayer = 1;
-let win = false;
+let movesCounter = 0;
+const maxMoves = Math.pow(field.length, 2);
 
 function getField() {
   return field;
@@ -13,12 +14,16 @@ function checkWin(player, field) {
 }
 
 function makeMove(x, y) {
+  if(movesCounter === maxMoves){
+    return 'Tie'
+  }
   if(validate(x,y, getField())) {
     field[x-1][y-1] = currentPlayer;
     if (checkWin(currentPlayer, field)){
       return 'Win'
     }
     setCurrentPlayer();
+    movesCounter += 1;
     return 'OK'
   }
   return false
@@ -26,6 +31,7 @@ function makeMove(x, y) {
 function reset() {
   field = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
   currentPlayer = 1;
+  movesCounter = 0;
 }
 
 function presetField(newField) {

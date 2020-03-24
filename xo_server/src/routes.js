@@ -12,6 +12,9 @@ router.post('/move', (req, res) => {
   } else if (data === 'Win'){
     res.status(200).send({ data: 'Win', winner: controller.getCurrentPlayer()});
   }
+  else if (data === 'Tie'){
+    res.status(200).send('Tie');
+  }
   else {
     res.status(200).send('OK');
   }

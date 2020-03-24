@@ -27,16 +27,16 @@ Then('поле становится {string}', (rez) => {
       });
   return assert(data,rez);
 });
-Given('поле {string}', function (str){
-    str = controller.presetField(("100|200|102").split('|'));
-    let currentPlayer = 1;
-    return data = request(server)
-        .post('/move')
-        .send({ x, y })
-        .then((res) => {
-            rez = res;
-        });
-});
+// Given('поле {string}', function (str){
+//     str = controller.presetField(("100|200|102").split('|'));
+//     let currentPlayer = 1;
+//     return data = request(server)
+//         .post('/move')
+//         .send({ x, y })
+//         .then((res) => {
+//             rez = res;
+//         });
+// });
 Then(/^возвращается ошибка$/, function () {
     let field = "100|200|102";
     let data = request(server)
@@ -45,4 +45,26 @@ Then(/^возвращается ошибка$/, function () {
             res;
         });
     return assert(data,field.split('|'));
+});
+Given('поле {string}', function (str){
+    let currentPlayer = 1;
+    return data = request(server)
+        .post('/move')
+        .send({ x, y })
+        .then((res) => {
+            rez = res;
+        });
+});
+Then('победил игрок {int}', (currentPlayer) => {
+   let res = data = request(server)
+       .post('/move')
+       .send({ x, y })
+       .then((res) => {
+           rez = res;
+       });
+   if(res.data.data === 'Win'){
+       return 'победил игрок' + currentPlayer
+   }
+   else
+       return res;
 });

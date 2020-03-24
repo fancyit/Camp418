@@ -8,7 +8,8 @@ import { fieldUrl, moveUrl, resetUrl } from './constants';
 
 function App() {
   const [field, setField] = useState([[0, 0, 0],[0, 0, 0],[0, 0, 0]]);
-  const [winner, setWinner] = useState('');
+  const [winner, setWinner] = useState();
+  const [errorMsg, setErrorMsg] = useState(null);
   const updateField = function() {
     axios.get(fieldUrl).then(res => {
       setField(res.data);
@@ -17,20 +18,27 @@ function App() {
 
   const move = function(x, y){
     //console.log(x + ' , ' + y);
+    setErrorMsg(null);
     if(!winner) {
       axios.post(moveUrl, {
         x: x + 1,
         y: y + 1
       }).then((res) => {
-        if (res.data.winner) {
-          setWinner('Player ' + res.data.winner + ' has won!!!');
-        } else {
+        if (res.data.winner) {          
+          setWinner('Player ' + res.data.winner + ' won! Fatality!');
           updateField();
         }
+        else if (res.data === 'Tie') {
+          setWinner('Game is over!');
+          updateField();
+        }
+      updateField();
+    },
+      (error) => {
+        setErrorMsg('Cell is taken or out of field');
+        updateField();
       });
-      //}).then(updateField);
-    }
-  };
+  }};
   const reset = () => {
     axios.post(resetUrl);
     updateField();
@@ -55,6 +63,7 @@ function App() {
         </div>)}
         <div className="button" style={{ width: "100%" }}  onClick={() => reset()}>Reset</div>
         {winner ? <p style={{ textAlign: "center", backgroundColor: '#0f646e', color: 'white' }}>{winner}</p> : null}
+        {errorMsg ? <p style={{ textAlign: "center", backgroundColor: '#cc3f23', color: 'white' }}>{errorMsg}</p> : null}
       </div>
     </div>
   );
