@@ -1,15 +1,6 @@
-const makeMove = (move) => {
-    win = checkWin(currentPlayer);
-    if (win) {
-        console.log(grid.join('|'));
-        console.log(grid);
-        console.log('Winner is Player ', currentPlayer);
-    }
-    changePlayer();
-};
-function checkLines(player, grid) {
+function checkLines(player, grid) {    
     let row;
-    let col;
+    let col; 
     for (let i = 0; i < grid.length; i++) {
         row = true;
         col = true;
@@ -30,8 +21,6 @@ function checkDiags(player, grid) {
     }
     return (forward || backward);
 }
-
-
 module.exports = {
     checkLines,
     checkDiags,
