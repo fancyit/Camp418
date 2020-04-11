@@ -1,5 +1,4 @@
-const validate = require('./helpers/validators');
-const { checkLines, checkDiags } = require('./helpers/winChecker');
+const { checkLines, checkDiags, moveValidate } = require('./helpers/gameUtils');
 
 let field = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 let currentPlayer = 1;
@@ -20,7 +19,7 @@ function makeMove(x, y) {
   if (movesCounter === maxMoves) {
     return 'Tie';
   }
-  if (validate(x, y, getField())) {
+  if (moveValidate(x, y, getField())) {
     field[x - 1][y - 1] = currentPlayer;
     if (checkWin(currentPlayer, field)) {
       winner = currentPlayer;
