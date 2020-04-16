@@ -1,0 +1,19 @@
+GET http://localhost:2000/getUsers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVGVzdDYiLCJpYXQiOjE1ODY1MDgzNDgsImV4cCI6MTU4NjUwODM2M30.zTfngtYiJF4AamXwNrqb42tA0iJga-k5yrM1I_99IhU
+
+###
+POST http://localhost:2000/signUp
+Content-Type: application/json 
+
+{
+  "username": "Test6",  
+  "password": "Qwerty6"
+}
+#####
+POST http://localhost:2000/signIn
+Content-Type: application/json 
+
+{
+  "username": "Test6",  
+  "password": "Qwerty6"
+}
