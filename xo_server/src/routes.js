@@ -1,7 +1,9 @@
-const router = require('express').Router();
+const routerBuilder = require('./rootRouter');
 const controller = require('./game');
 const users = require('./lib/localDB.json');
 const { tokenValidation } = require('./helpers/authUtlis');
+
+const router = new routerBuilder([tokenValidation]);
 
 router.get('/getField', (req, res) => {
   res.send(200, controller.getField());
@@ -36,11 +38,9 @@ router.post('/presetField', (req, res) => {
   controller.presetField(req.body.field);
   res.status(200).send('OK');
 });
-router.get('/getUsers', tokenValidation, (req, res) => {
-  console.log(req.user.user);
-  const usersList = users.filter((u) => {
-    return u.username === req.user.user;
-  });
+router.get('/getUsers', (req, res) => {
+  if (!req.user) res.sendStatus(401);
+  const usersList = users.filter((u) => u.username === req.user.user);
   res.status(200).send(usersList);
 });
 

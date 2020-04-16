@@ -1,5 +1,17 @@
 GET http://localhost:2000/getUsers
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVGVzdDYiLCJpYXQiOjE1ODY1MDgzNDgsImV4cCI6MTU4NjUwODM2M30.zTfngtYiJF4AamXwNrqb42tA0iJga-k5yrM1I_99IhU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVGVzdDYiLCJpYXQiOjE1ODcwNjI3MzksImV4cCI6MTU4NzA2MzYzOX0.w1zEB9GOyal3OQ8sEMlFHCd9AI-zWZimyeOYdt8chTk
+
+###
+GET http://localhost:2000/getField
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVGVzdDYiLCJpYXQiOjE1ODcwNjI3MzksImV4cCI6MTU4NzA2MzYzOX0.w1zEB9GOyal3OQ8sEMlFHCd9AI-zWZimyeOYdt8chTk
+###
+
+POST http://localhost:2000/rToken
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiJ9.VGVzdDY.JCXUDUkOcSgh-cM-E8KlxZwM31ZKhYQo9uB8Kyh8-sk"
+}
 
 ###
 POST http://localhost:2000/signUp

@@ -1,16 +1,15 @@
 const jwt = require('jsonwebtoken');
 
 function generateAccessToken(user, tokenOpt) {
-  let token = '';
+  let token = null;
   switch (tokenOpt) {
     case 'access':
-      token = jwt.sign(user, process.env.TOKEN_SECRET, { expiresIn: 60 });
+      token = jwt.sign({ user }, process.env.TOKEN_SECRET, { expiresIn: 900 });
       break;
     case 'refresh':
       token = jwt.sign(user, process.env.REFRESH_SECRET);
       break;
     default:
-      token = '';
       break;
   }
   return token;
