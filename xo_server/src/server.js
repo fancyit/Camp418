@@ -17,6 +17,4 @@ app.use(routes.build());
 app.use(auth);
 
 app.use(errNotify);
-
-
 module.exports = app;
