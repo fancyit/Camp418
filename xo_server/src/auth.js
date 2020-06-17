@@ -1,23 +1,31 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
+const User = require('./models/user');
 const users = require('./lib/localDB.json');
 const addUser = require('./helpers/fileWriter');
 const { generateAccessToken } = require('./helpers/authUtlis');
 
-let refreshTokens = [];
+const refreshTokens = [];
 
 router.post('/signUp', async (req, res) => {
   try {
     const { username, password } = req.body;
+    if (password === '') {
+      res.status(401).send('Password should not be empty!!!');
+    }
     const hashedPass = await bcrypt.hash(password, 5);
-    addUser(
-      {
-        id: users.length,
-        username,
-        password: hashedPass,
-      },
-    );
+    const id = uuidv4();
+    const user = new User(id, username, hashedPass);
+    addUser(user);
+    // addUser(
+    //   {
+    //     id: users.length,
+    //     username,
+    //     password: hashedPass,
+    //   },
+    // );
     await res.status(201).send('OK');
   } catch (err) {
     await res.status(500).send(err.toString());
@@ -27,7 +35,7 @@ router.post('/signUp', async (req, res) => {
 router.post('/signIn', async (req, res) => {
   try {
     const { username, password } = req.body;
-    const user = users.find((u) => u.username === username);
+    const user = users.find((u) => u.name === username);
     if (user && await bcrypt.compare(password, user.password)) {
       const accessToken = await generateAccessToken(username, 'access');
       const refreshToken = await generateAccessToken(username, 'refresh');

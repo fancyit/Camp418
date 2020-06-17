@@ -40,7 +40,7 @@ router.post('/presetField', (req, res) => {
 });
 router.get('/getUsers', (req, res) => {
   if (!req.user) res.sendStatus(401);
-  const usersList = users.filter((u) => u.username === req.user.user);
+  const usersList = users.filter((u) => u.name === req.user.user);
   res.status(200).send(usersList);
 });
 

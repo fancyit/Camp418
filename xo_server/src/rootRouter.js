@@ -13,6 +13,7 @@ class routerBuilder {
   post (event, handler) {
     this._router.post(event, this._midlewares, handler);
   }
+  // put, delete... - to be implemented
   build () {
     return this._router;
   }

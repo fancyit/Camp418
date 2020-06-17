@@ -1,5 +1,5 @@
 GET http://localhost:2000/getUsers
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVGVzdDYiLCJpYXQiOjE1ODcwNjI3MzksImV4cCI6MTU4NzA2MzYzOX0.w1zEB9GOyal3OQ8sEMlFHCd9AI-zWZimyeOYdt8chTk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYm9sb3Rub3YuYSIsImlhdCI6MTU4NzI5MTkwNywiZXhwIjoxNTg3MjkyODA3fQ.ksslTt1KAZ7QSNbHWFdp-WOt3vWvrimqXle4sX7YiDY
 
 ###
 GET http://localhost:2000/getField
@@ -18,14 +18,23 @@ POST http://localhost:2000/signUp
 Content-Type: application/json 
 
 {
-  "username": "Test6",  
-  "password": "Qwerty6"
+  "username": "bolotnov.a",  
+  "password": "Lth;b2"
+}
+#####
+###
+POST http://localhost:2000/signUp
+Content-Type: application/json 
+
+{
+  "username": "bolotnov.b",  
+  "password": ""
 }
 #####
 POST http://localhost:2000/signIn
 Content-Type: application/json 
 
 {
-  "username": "Test6",  
-  "password": "Qwerty6"
+  "username": "bolotnov.a",  
+  "password": "Lth;b2"
 }
