@@ -2,12 +2,15 @@ class User {
   id;
   name;
   password;
-  group;
-  constructor(id, name, password, group = 'users') {
+  email;
+  cGame;
+  gamesHistory;
+  friendsList;
+  constructor(id, name, password, email) {
     this.id = id;
     this.name = name;
     this.password = password;
-    this.group = group;
+    this.email = email;
   }
 }
 module.exports = User;

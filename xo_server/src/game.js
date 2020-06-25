@@ -1,4 +1,4 @@
-const { checkLines, checkDiags, moveValidate } = require('./helpers/gameUtils');
+const { checkLines, moveValidate } = require('./helpers/gameUtils');
 
 let field = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 let currentPlayer = 1;
@@ -13,7 +13,7 @@ function setCurrentPlayer() {
   currentPlayer = currentPlayer === 1 ? 2 : 1;
 }
 function checkWin(player, grid) {
-  return (checkLines(player, grid) || checkDiags(player, grid));
+  return (checkLines(player, grid));
 }
 function makeMove(x, y) {
   if (movesCounter === maxMoves) {

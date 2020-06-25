@@ -3,7 +3,8 @@ const controller = require('./game');
 const users = require('./lib/localDB.json');
 const { tokenValidation } = require('./helpers/authUtlis');
 
-const router = new routerBuilder([tokenValidation]);
+//const router = new routerBuilder([tokenValidation]);
+const router = new routerBuilder([]);
 
 router.get('/getField', (req, res) => {
   res.send(200, controller.getField());
