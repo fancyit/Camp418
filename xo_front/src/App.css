@@ -1,23 +1,37 @@
-.App {
+#root {
   display: flex;
   justify-content: center;
 }
+.App {
+  display: flex;
+  /* height: 1vh; */
+  justify-content: center;
+  flex-direction: column;
+}
 
-.field {
+.field {  
+  width: 450px;
+  height: 450px;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .row {
   display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-direction: row;
 }
 .cell {
-  border: 1px solid black;
-  cursor: pointer;
-  display: flex;
-  width: 50px;
-  height: 50px;
-  align-items: center;
-  justify-content: center;
-  margin: 5px;
+  width: 120px;
+    height: 120px;
+    border: 1px solid black;
+    cursor: pointer;
+    margin: 5px;
+    align-items: stretch;
+    justify-items: baseline;
 }
 .button {
   border: 2px solid #000000;

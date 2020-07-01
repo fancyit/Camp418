@@ -14,7 +14,8 @@ function checkLines(player, grid) {
   }
   return (row || col) || (forward || backward);
 }
-const moveValidate = (x, y, field) => (x - 1 >= 0
+const moveValidate = (x, y, field) => (
+    x - 1 >= 0
     && y - 1 >= 0
     && x - 1 < field.length
     && y - 1 < field.length
