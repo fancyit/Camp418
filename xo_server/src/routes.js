@@ -3,7 +3,8 @@ const controller = require('./game');
 const users = require('./lib/localDB.json');
 const { tokenValidation } = require('./helpers/authUtlis');
 
-const router = new routerBuilder([tokenValidation]);
+//const router = new routerBuilder([tokenValidation]);
+const router = new routerBuilder([]);
 
 router.get('/getField', (req, res) => {
   res.send(200, controller.getField());
@@ -11,6 +12,10 @@ router.get('/getField', (req, res) => {
 
 router.get('/getWinner', (req, res) => {
   res.send(200, controller.getWinner());
+});
+
+router.get('/getCurrentPlayer', (req, res) => {  
+  res.send(200, controller.getCurrentPlayer());
 });
 
 router.get('/setCurrentPlayer', (req, res) => {
@@ -21,7 +26,7 @@ router.get('/setCurrentPlayer', (req, res) => {
 router.post('/move', (req, res) => {
   const data = controller.makeMove(req.body.x, req.body.y);
   if (!data) {
-    res.status(409).send('Cell is taken or out of field!');
+    res.status(409).send('Cell is taken');
   } else if (data === 'Win') {
     res.status(200).send({ data: 'Win', winner: controller.getCurrentPlayer() });
   } else if (data === 'Tie') {

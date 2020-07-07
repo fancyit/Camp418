@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.use(routes.build());
-app.use(auth);
+//app.use(auth);
 
 app.use(errNotify);
 module.exports = app;
