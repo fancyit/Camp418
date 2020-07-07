@@ -14,6 +14,10 @@ router.get('/getWinner', (req, res) => {
   res.send(200, controller.getWinner());
 });
 
+router.get('/getCurrentPlayer', (req, res) => {  
+  res.send(200, controller.getCurrentPlayer());
+});
+
 router.get('/setCurrentPlayer', (req, res) => {
   controller.setCurrentPlayer(req.body.player);
   res.send(200, controller.getCurrentPlayer());

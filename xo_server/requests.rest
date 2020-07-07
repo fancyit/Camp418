@@ -6,6 +6,10 @@ GET http://localhost:2000/getField
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiVGVzdDYiLCJpYXQiOjE1ODcwNjI3MzksImV4cCI6MTU4NzA2MzYzOX0.w1zEB9GOyal3OQ8sEMlFHCd9AI-zWZimyeOYdt8chTk
 ###
 
+###
+GET http://localhost:2000/getCurrentPlayer
+###
+
 POST http://localhost:2000/rToken
 Content-Type: application/json
 

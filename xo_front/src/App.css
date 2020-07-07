@@ -1,6 +1,7 @@
 #root {
   display: flex;
   justify-content: center;
+  background: #F4F4F4;
 }
 .App {
   display: flex;
@@ -9,9 +10,9 @@
   flex-direction: column;
 }
 
-.field {  
-  width: 450px;
-  height: 450px;
+.field {
+  width: 370px;
+  height: 400px;
   display: flex;
   align-items: stretch;
   flex-direction: column;
@@ -26,21 +27,59 @@
 }
 .cell {
   width: 120px;
-    height: 120px;
-    border: 1px solid black;
-    cursor: pointer;
-    margin: 5px;
-    align-items: stretch;
-    justify-items: baseline;
+  height: 120px;
+  border: none;
+  border-radius: 5px;
+  background-color: #a1c8f0;
+  cursor: pointer;
+  align-items: stretch;
+  justify-items: baseline;  
+}
+.x {
+  height: 120px;
+  width: 120px;
+  background:transparent;  
+  position: relative;
+}
+
+.x:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "\2a2f"; /* use the hex value here... */
+  font-size: 120px; 
+  color: #F4F4F4;
+  line-height: 90px;
+  text-align: center;
+}
+.o {
+  height: 120px;
+  width: 120px;
+  background:transparent;  
+  position: relative;
+}
+.o:after{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "\25cb"; /* use the hex value here... */
+  font-size: 90px; 
+  color: #F4F4F4;
+  line-height: 110px;
+  text-align: center;
 }
 .button {
   border: 2px solid #000000;
-  display:inline-block;
+  display: inline-block;
   box-sizing: border-box;
-  text-decoration:none;
-  text-transform:uppercase;
+  text-decoration: none;
+  text-transform: uppercase;
   text-align: center;
-  font-weight:400;
-  color:#000000;
-  cursor:pointer;
+  font-weight: 400;
+  color: #000000;
+  cursor: pointer;
 }
